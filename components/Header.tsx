@@ -1,8 +1,12 @@
 import { View, Text, StyleSheet } from 'react-native';
-export function Header() {
+import {Palette} from "../theme/palette";
+type HeaderProps = {
+  colors:Palette,
+}
+export function Header({colors}:HeaderProps) {
   return (
-    <View style={styles.header}>
-          <Text style={styles.logoText}>Little Lemon</Text>
+    <View style={[styles.header,{backgroundColor:colors.surface}]}>
+          <Text style={[styles.logoText,{color:colors.text}]}>Little Lemon</Text>
           <Text style={styles.headerText}>🍋</Text>
     </View>
   );
@@ -21,7 +25,6 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     headerText: {
-        color: '#EDEFEE',
         fontSize: 18,
     }
 });
