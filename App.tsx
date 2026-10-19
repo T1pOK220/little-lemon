@@ -1,32 +1,22 @@
-import { StyleSheet,View,useColorScheme} from 'react-native';
-import { useState } from 'react';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
-import MenuFlatScreen from './screens/MenuFlatScreen';
-import MenuGroupedScreen from './screens/MenuGropedScreen';
-import WelcomeScreen from './screens/WelcomeScreen';
-import LoginScreen from './screens/LoginScreen';
-import { lightColors,darkColors } from './theme/palette';
+import { useColorScheme,StyleSheet } from 'react-native';
+import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import StackFlow from './navigation/StackFlow';
+import TabsFlow from './navigation/TabsFlow';
+import DrawerFlow from './navigation/DrawerFlow';
+const ActiveNavigator = StackFlow;
 export default function App() {
-  const colorScheme = useColorScheme();
-const isDark = colorScheme === 'dark';
-const colors = isDark ? darkColors : lightColors;
-  const [demoEmail, setDemoEmail] = useState<string | null>(null);
-  return (
-    <SafeAreaProvider>
-      <SafeAreaView style={[styles.container,{backgroundColor:colors.background}]} edges={['top', 'bottom']}>
-        <Header colors={colors} />
-      <View style={styles.content}>
-        {demoEmail === null ? 
-           (<LoginScreen colors={colors} onContinue={setDemoEmail} />) : 
-           (<WelcomeScreen colors={colors} email={demoEmail} onExit={() => setDemoEmail(null)}/>)
-        }
-      </View>
-        <Footer colors={colors}/>
-      </SafeAreaView>
-    </SafeAreaProvider>
-  );
+const isDark = useColorScheme() === 'dark';
+return (
+<GestureHandlerRootView style={{ flex: 1 }}>
+<SafeAreaProvider>
+<NavigationContainer theme={isDark ? DarkTheme : DefaultTheme}>
+<ActiveNavigator />
+</NavigationContainer>
+</SafeAreaProvider>
+</GestureHandlerRootView>
+);
 }
 const styles = StyleSheet.create({
   container: {
