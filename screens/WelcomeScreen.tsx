@@ -1,24 +1,31 @@
 import { useState } from 'react';
-import { Text, View,StyleSheet,TextInput } from 'react-native';
-function WelcomeScreen() {
-    const [name,setName]=useState("");
+import { Text, View,StyleSheet,TextInput, Pressable,Image,useWindowDimensions,ActivityIndicator} from 'react-native';
+import type { Palette } from "../theme/palette.ts";
+type WelcomeScreenProps = {
+colors: Palette;
+email: string;
+onExit: () => void;
+};
+function WelcomeScreen({colors,email,onExit}:WelcomeScreenProps) {
+    const { width, height, scale, fontScale } = useWindowDimensions();
+const wide = width >= 600;
 return (
-<View style={styles.container}>
-  <View style={styles.box}><Text style={styles.greeting}>{name.trim() ? `Вітаємо, ${name.trim()}!` : 'Введіть ім’я.'}</Text>
-  <TextInput
-    style={{
-        width: 250,
-        height: 45,
-        borderWidth: 1,
-        borderColor: '#333',
-        paddingHorizontal: 10,
-        borderRadius:10,
-        marginTop:10
-    }}
-    value={name}
-    onChangeText={setName}
-    placeholder="Введіть ім'я"
-/></View>
+<View style={[styles.container,{flexDirection: wide ? 'row' : 'column'},{backgroundColor:colors.background}]}>
+    <Image
+    source={require('../assets/icon.png')}
+style={styles.logo}
+resizeMode="contain"
+accessible={true}
+accessibilityLabel="Логотип Little Lemon"
+    />
+    <Text style={[styles.text,{color:colors.text}]}>Дані перевірено локально. Відкрито
+навчальний екран для {email}</Text>
+<Pressable
+onPress={onExit}
+style={[styles.btn,{backgroundColor:colors.accent}]}
+>
+    <Text style={[styles.text,{color:colors.onAccent}]}>Повернутися до форми</Text>
+</Pressable>
 </View>
 );
 }
@@ -41,7 +48,7 @@ const styles = StyleSheet.create({
         color: '#333333',
         fontSize: 18,
         marginBottom: 10,
-        alignSelf: 'flex-start',
+        alignContent:"center"
     },
     box:{
         backgroundColor:"#e1e1e1",
@@ -53,6 +60,22 @@ const styles = StyleSheet.create({
     greeting:{
         fontSize:25,
         fontWeight:600
-    }
+    },
+    logo:{
+        width:120,
+        height:140,
+        alignSelf:"center",
+        marginBottom:16,
+    },
+      title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  btn:{
+    marginTop:10,
+    padding:10,
+    alignItems:"center",
+    borderRadius:12
+  }
 });
 export default WelcomeScreen

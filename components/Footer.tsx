@@ -1,9 +1,13 @@
 import {StyleSheet,Text, View } from 'react-native';
-export function Footer() {
+import {Palette} from "../theme/palette";
+type FooterProps = {
+  colors:Palette,
+}
+export function Footer({colors}:FooterProps) {
     const year = new Date().getFullYear();
   return (
-    <View style={styles.footer}>
-          <Text style={styles.footerText}>© {year} Little Lemon.</Text>
+    <View style={[styles.footer,{backgroundColor:colors.surface}]}>
+          <Text style={[styles.footerText,{color:colors.text}]}>© {year} Little Lemon.</Text>
     </View>
   );
 }   
