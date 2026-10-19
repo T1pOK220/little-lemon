@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { StyleSheet,ScrollView } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+import MenuFlatScreen from './screens/MenuFlatScreen';
+import MenuGroupedScreen from './screens/MenuGropedScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
+import LoginScreen from './screens/LoginScreen';
 export default function App() {
+  const ActiveScreen = MenuFlatScreen;
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+        <Header />
+       <ActiveScreen />
+        <Footer />
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#495E57',
   },
+  text: {
+    color: '#333333',
+  },
+  scroll: {
+    flex: 1,
+    backgroundColor: '#EDEFEE',
+  },
+  scrollContent: {
+    paddingBottom: 20,
+  }
 });
