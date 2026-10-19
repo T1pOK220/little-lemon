@@ -1,10 +1,15 @@
-import { FlatList,StyleSheet,Text,View} from "react-native";
+import { FlatList,Pressable,StyleSheet,Text,View} from "react-native";
 import { useState } from "react";
 import type {MenuItem} from "../types/menu";
 import { menuItems } from "../data/menu";
 import MenuItemRow from "../components/MenuItemRow";
 import { TextInput } from "react-native";
-function MenuFlatScreen (){
+import { Palette } from "../theme/palette";
+type MenuProps ={ 
+  colors:Palette,
+  onContinue: (itemId:string)=>void;
+}
+function MenuFlatScreen ({colors,onContinue}:MenuProps){
   const [query, setQuery] = useState('');
 const normalizedQuery = query.trim().toLocaleLowerCase('uk-UA');
 const visibleItems = menuItems.filter((item) =>
@@ -17,7 +22,7 @@ item.name.toLocaleLowerCase('uk-UA').includes(normalizedQuery),)
         contentContainerStyle={styles.content}
         data={visibleItems}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <MenuItemRow item={item} />}
+        renderItem={({ item }) => (<Pressable onPress={()=>{onContinue(item.id)}}><MenuItemRow item={item} /></Pressable>)}
         ListHeaderComponent={
           <View style={styles.listHeader}>
             <Text style={styles.title}>Наше меню</Text>

@@ -5,6 +5,7 @@ type WelcomeScreenProps = {
 colors: Palette;
 email: string;
 onExit: () => void;
+// onContinue: ()=>void
 };
 function WelcomeScreen({colors,email,onExit}:WelcomeScreenProps) {
     const { width, height, scale, fontScale } = useWindowDimensions();
@@ -18,14 +19,20 @@ resizeMode="contain"
 accessible={true}
 accessibilityLabel="Логотип Little Lemon"
     />
-    <Text style={[styles.text,{color:colors.text}]}>Дані перевірено локально. Відкрито
-навчальний екран для {email}</Text>
+    <Text style={[styles.text,{color:colors.text}]}>Навчальний
+екран привітання для {email}</Text>
 <Pressable
 onPress={onExit}
 style={[styles.btn,{backgroundColor:colors.accent}]}
 >
     <Text style={[styles.text,{color:colors.onAccent}]}>Повернутися до форми</Text>
 </Pressable>
+{/* <Pressable
+onPress={onContinue}
+style={[styles.btn,{backgroundColor:colors.accent}]}
+>
+    <Text style={[styles.text,{color:colors.onAccent}]}>Перейти до меню</Text>
+</Pressable> */}
 </View>
 );
 }
