@@ -9,8 +9,8 @@ import DetailsScreen from '../screens/DetailsScreen';
 const Stack = createNativeStackNavigator<StackParamList>();
 type LoginProps = NativeStackScreenProps<StackParamList, 'Login'>;
 type WelcomeProps = NativeStackScreenProps<StackParamList, 'Welcome'>;
-// type MenuProps = NativeStackScreenProps<StackParamList,"Menu">;
-// type DetailsProps = NativeStackScreenProps<StackParamList,"Details">;
+type MenuProps = NativeStackScreenProps<StackParamList,"Menu">;
+type DetailsProps = NativeStackScreenProps<StackParamList,"Details">;
 function LoginRoute({ navigation }: LoginProps) {
 const colors = useAppColors();
 return <LoginScreen colors={colors} onContinue={(email) =>
