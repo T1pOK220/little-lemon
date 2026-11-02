@@ -4,6 +4,8 @@ import LoginScreen from '../screens/LoginScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import { useAppColors } from '../theme/useAppColors';
 import type { StackParamList } from './types';
+import { Button } from 'react-native';
+import RemoteMenuScreen from '../screens/RemoteMenuScreen';
 import MenuFlatScreen from '../screens/MenuFlatScreen';
 import DetailsScreen from '../screens/DetailsScreen';
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -47,7 +49,17 @@ return (
 <Stack.Screen name="Login" component={LoginRoute}
 options={{ title: 'Навчальна форма' }} />
 <Stack.Screen name="Welcome" component={WelcomeRoute}
-options={{ title: 'Привітання' }} />
+options={({ navigation }) => ({
+title: 'Привітання',
+headerRight: () => (
+<Button title="Меню" onPress={() => navigation.navigate('RemoteMenu')} />
+),
+})} />
+<Stack.Screen
+name="RemoteMenu"
+component={RemoteMenuScreen}
+options={{ title: 'Меню Little Lemon' }}
+/>
 {/* <Stack.Screen name='Menu' component={MenuRoute} options={{ title: 'Меню' }} />
 <Stack.Screen name='Details' component={DetailsRoute} options={{ title: 'Про страву' }} /> */}
 </Stack.Navigator>

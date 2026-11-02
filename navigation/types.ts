@@ -3,6 +3,7 @@ Login: undefined;
 Welcome: { email: string };
 Menu:undefined;
 Details:{itemId:string};
+RemoteMenu: undefined;
 
 };
 export type TabParamList = {
