@@ -9,12 +9,14 @@ import RemoteMenuScreen from '../screens/RemoteMenuScreen';
 import MenuFlatScreen from '../screens/MenuFlatScreen';
 import DetailsScreen from '../screens/DetailsScreen';
 import PreferencesScreen from '../screens/PreferencesScreen';
+import CustomersScreen from '../screens/Costumers';
 const Stack = createNativeStackNavigator<StackParamList>();
 type LoginProps = NativeStackScreenProps<StackParamList, 'Login'>;
 type WelcomeProps = NativeStackScreenProps<StackParamList, 'Welcome'>;
 type PreferencesProps = NativeStackScreenProps<StackParamList, 'Preferences'>;
 type MenuProps = NativeStackScreenProps<StackParamList, 'Menu'>;
 type DetailsProps = NativeStackScreenProps<StackParamList, 'Details'>;
+type CustomersProps = NativeStackScreenProps<StackParamList, 'Customers'>;
 function LoginRoute({ navigation }: LoginProps) {
 const colors = useAppColors();
 return <LoginScreen colors={colors} onContinue={(email) =>
@@ -28,7 +30,8 @@ colors={colors}
 email={route.params.email}
 onExit={() => navigation.goBack()}
 onSettings={() => navigation.navigate('Preferences')}
- onContinue={()=>navigation.navigate("Menu")}
+onContinue={()=>navigation.navigate("Menu")}
+onCustomers={()=>navigation.navigate("Customers")}
 />;
 }
 function PreferencesRoute({ navigation }: PreferencesProps) {
@@ -49,6 +52,10 @@ function DetailsRoute({navigation,route}:DetailsProps){
     id={route.params.itemId}
     onExit={()=>navigation.goBack()}
     />
+}
+function CustomersRoute({navigation}:CustomersProps){
+    const colors = useAppColors();
+    return <CustomersScreen colors={colors} />
 }
 export default function StackFlow() {
 return (
@@ -71,6 +78,8 @@ options={{ title: 'Меню Little Lemon' }}
 options={{ title: 'Налаштування' }} />
 <Stack.Screen name='Menu' component={MenuRoute} options={{ title: 'Меню' }} />
 <Stack.Screen name='Details' component={DetailsRoute} options={{ title: 'Про страву' }} />
+<Stack.Screen name="Customers" component={CustomersRoute}
+options={{ title: 'Клієнти' }} />
 </Stack.Navigator>
 
 );
