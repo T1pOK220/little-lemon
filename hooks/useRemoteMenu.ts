@@ -16,6 +16,7 @@ controller.abort();
 }, REQUEST_TIMEOUT_MS);
 async function load() {
 try {
+        console.log('useRemoteMenu called')
 const data = await fetchRemoteMenu(url, controller.signal);
 if (active) {
 setState({ status: 'success', data });
