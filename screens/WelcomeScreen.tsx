@@ -6,9 +6,10 @@ colors: Palette;
 email: string;
 onExit: () => void;
 onSettings: () => void;
-onContinue: ()=>void
+onContinue: ()=>void;
+onCustomers: ()=>void;
 };
-function WelcomeScreen({colors,email,onExit,onSettings,onContinue}:WelcomeScreenProps) {
+function WelcomeScreen({colors,email,onExit,onSettings,onContinue,onCustomers}:WelcomeScreenProps) {
     const { width, height, scale, fontScale } = useWindowDimensions();
 const wide = width >= 600;
 return (
@@ -33,6 +34,12 @@ onPress={onContinue}
 style={[styles.btn,{backgroundColor:colors.accent}]}
 >
     <Text style={[styles.text,{color:colors.onAccent}]}>Перейти до меню</Text>
+</Pressable>
+<Pressable
+onPress={onCustomers}
+style={[styles.btn,{backgroundColor:colors.accent}]}
+>
+<Text style={[styles.text,{color:colors.onAccent}]}>Клієнти</Text>
 </Pressable>
 <Button title="Налаштування"
 onPress={onSettings} />

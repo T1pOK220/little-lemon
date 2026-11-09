@@ -5,6 +5,7 @@ Menu:undefined;
 Details:{itemId:string};
 RemoteMenu: undefined;
 Preferences: undefined;
+Customers: undefined;
 };
 export type TabParamList = {
 Login: undefined;
