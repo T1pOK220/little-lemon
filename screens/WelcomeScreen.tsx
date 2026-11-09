@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { Text, View,StyleSheet,TextInput, Pressable,Image,useWindowDimensions,ActivityIndicator} from 'react-native';
+import { Text, View,StyleSheet,TextInput, Pressable,Image,useWindowDimensions,ActivityIndicator, Button} from 'react-native';
 import type { Palette } from "../theme/palette.ts";
 type WelcomeScreenProps = {
 colors: Palette;
 email: string;
 onExit: () => void;
-// onContinue: ()=>void
+onSettings: () => void;
+onContinue: ()=>void
 };
-function WelcomeScreen({colors,email,onExit}:WelcomeScreenProps) {
+function WelcomeScreen({colors,email,onExit,onSettings,onContinue}:WelcomeScreenProps) {
     const { width, height, scale, fontScale } = useWindowDimensions();
 const wide = width >= 600;
 return (
@@ -27,12 +28,14 @@ style={[styles.btn,{backgroundColor:colors.accent}]}
 >
     <Text style={[styles.text,{color:colors.onAccent}]}>Повернутися до форми</Text>
 </Pressable>
-{/* <Pressable
+<Pressable
 onPress={onContinue}
 style={[styles.btn,{backgroundColor:colors.accent}]}
 >
     <Text style={[styles.text,{color:colors.onAccent}]}>Перейти до меню</Text>
-</Pressable> */}
+</Pressable>
+<Button title="Налаштування"
+onPress={onSettings} />
 </View>
 );
 }

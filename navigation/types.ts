@@ -4,7 +4,7 @@ Welcome: { email: string };
 Menu:undefined;
 Details:{itemId:string};
 RemoteMenu: undefined;
-
+Preferences: undefined;
 };
 export type TabParamList = {
 Login: undefined;
